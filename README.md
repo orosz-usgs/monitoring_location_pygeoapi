@@ -1,1 +1,74 @@
-# monitoring_location_pygeoapi
+# Monitoring Location Pygeoapi 
+USGS Water Data for the Nation (WFDN) GeoApi service for monitoring locations.
+
+## Local Configuration
+This repository contains scripts to build and deploy a pygeoapi server for monitoring locations. pygeoapi is a Python
+server implementation of the OGC API suite of standards. See https://pygeoapi.io/ for more details.
+
+The server is packaged and deployed as a docker container. The server's configuration is set by local.config.yml
+file.
+ 
+To run in a development environment, create an .env file in
+the project root directory containing the following (shown are example values):
+
+...
+NWIS_DATABASE_HOST=<192.168.0.1>
+NWIS_DATABASE_PORT=<5434>
+
+NWIS_DATABASE_USERNAME=<nwis_username>
+NWIS_DATABASE_PASSWORD=<changeMe>
+
+PYGEOAPI_SERVER_IPV4=<172.29.0.2>
+
+PYGEOAPI_SERVER_HOST=<localhost>
+PYGEOAPI_SERVER_PORT=<5000>
+SCRIPT_NAME=</api/ogcAPI>
+```
+
+A .env.example is provided as a starting point.
+
+...
+docker network create --subnet=172.29.0.0/16 --gateway 172.29.0.1 geoapi
+docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 mynet
+...
+
+#### Environment variable definitions
+
+* **NWIS_DATABASE_HOST** - Host name or IP address of the NWIS database. Must be reachable from inside the
+container.
+* **NWIS_DATABASE_PORT** - Port of the NWIS database.
+
+* **NWIS_DATABASE_USERNAME** - username used to login to the NWIS database
+* **NWIS_DATABASE_PASSWORD** - password used to login to the NWIS database
+
+* **PYGEOAPI_SERVER_IPV4** - Docker IP address used
+
+* **PYGEOAPI_SERVER_HOST** - Host name or IP address of the pygeoapi server.
+* **PYGEOAPI_SERVER_PORT** - Port used to connect to API geo server.
+
+* **SCRIPT_NAME** - The url path used to access the API geo server.
+
+### Testing
+The pygeoapi server can be tested locally by spinning up the docker container.
+
+```
+% docker-compose up -d monitoring_location_pygeoapi
+```
+
+The application can be accessed at: http://${PYGEOAPI_SERVER_HOST}:${PYGEOAPI_SERVER_PORT}${SCRIPT_NAME}
+e.g. http://localhost:5000/api/ogcAPI
+
+### Other Helpful commands include:
+* __docker-compose up__ to create and start the containers
+* __docker-compose ps__ to list the containers
+* __docker-compose stop__ or __docker-compose kill__ to stop the containers
+* __docker-compose start__ to start the containers
+* __docker-compose rm__ to remove all containers
+* __docker network ls__ to get a list of local docker network names
+* __docker network inspect XXX__ to get the ip addresses of the running containers
+* __docker-compose ps -q__ to get the Docker Compose container ids
+* __docker ps -a__ to list all the Docker containers
+* __docker rm <containerId>__ to remove a container
+* __docker rmi <imageId>__ to remove an image
+* __docker logs <containerID>__ to view the Docker Compose logs in a container
+

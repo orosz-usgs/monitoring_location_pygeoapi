@@ -1,0 +1,77 @@
+server:
+  bind:
+    host: 0.0.0.0
+    port: ${PYGEOAPI_SERVER_PORT}
+  url: ${PYGEOAPI_SERVER_URL}
+  mimetype: application/json; charset=UTF-8
+  encoding: utf-8
+  language: en-US
+  cors: true
+  pretty_print: true
+  limit: 10
+  # templates: /path/to/templates
+  map:
+    url: http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
+logging:
+  level: DEBUG
+  #logfile: /tmp/pygeoapi.log
+metadata:
+  identification:
+    title: Water Quality Portal Monitoring Locations
+    description: OGC WFS3 API for geospatial information in WQP
+    keywords:
+      - geospatial
+      - wqp
+      - api
+    keywords_type: theme
+    terms_of_service: None
+    url: https://github.com/geopython/pygeoapi
+  license:
+    name: CC-BY 4.0 license
+    url: https://creativecommons.org/licenses/by/4.0/
+  provider:
+    name: National Water Quality Monitoring Counci
+    url: https://github.com/NWQMC
+  contact:
+    name: Jim Kreft
+    position: PO
+    address: 8505 Research Way
+    city: Middleton
+    stateorprovince: WI
+    postalcode: 53562
+    country: USA
+    #phone: 608-821-XXXX
+    email: jkreft@usgs.gov
+    #url: Contact URL
+    #hours: Hours of Service
+    #instructions: During hours of service.  Off on weekends.
+    role: pointOfContact
+
+datasets:
+  nwis_monitoring_locations:
+    title: NWIS Monitoring Locations
+    description: Locations where water quality sampling activities have been recorded in the NWIS source
+    keywords:
+      - WQP
+    links:
+      - type: text/html
+        rel: canonical
+        title: information
+        href: https://wqp-test.er.usgs.gov/provider/STEWARDS/
+        hreflang: en-US
+    extents:
+      spatial:
+        bbox: [-180, -90, 180, 90]
+        crs: http://www.opengis.net/def/crs/OGC/1.3/CRS83
+    provider:
+      name: PostgreSQL
+      data:
+        host: ${NWIS_DATABASE_HOST}
+        dbname: nwis_db
+        user: ${NWIS_DATABASE_USERNAME} 
+        password: ${NWIS_DATABASE_PASSWORD} 
+        port: ${NWIS_DATABASE_PORT}
+        search_path: ['nwis', 'public']
+      id_field: monitoring_location_id
+      table: monitoring_location
