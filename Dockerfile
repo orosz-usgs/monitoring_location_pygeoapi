@@ -31,9 +31,7 @@
 #
 # =================================================================
 
-FROM debian:buster-slim
-
-LABEL maintainer="Just van den Broecke <justb4@gmail.com>"
+FROM usgswma/python:debian-slim-buster-python-3.7-e923cf03e5573ba531a90edc9b8ae0f5f7cb6e13
 
 # Docker file for full geoapi server with libs/packages for all providers.
 # Server runs with gunicorn. You can override ENV settings.
@@ -62,18 +60,19 @@ ARG ADD_PIP_PACKAGES=""
 # ENV settings
 ENV TZ=${TIMEZONE} \
 	DEBIAN_FRONTEND="noninteractive" \
-	DEB_BUILD_DEPS="tzdata build-essential python3-setuptools python3-pip apt-utils git" \
+	DEB_BUILD_DEPS="tzdata build-essential apt-utils git" \
 	DEB_PACKAGES="locales libgdal20 python3-gdal libsqlite3-mod-spatialite curl ${ADD_DEB_PACKAGES}" \
 	PIP_PACKAGES="gunicorn==19.9.0 gevent==1.4.0 ${ADD_PIP_PACKAGES}"
 
 ENV PIP3="pip3 --trusted-host pypi.org --trusted-host files.pythonhosted.org"
 ENV GIT_SSL_NO_VERIFY=true
 
-ENV NWIS_DATABASE_HOST $NWIS_DATABASE_HOST
+ENV NWIS_DATABASE_ADDRESS $NWIS_DATABASE_ADDRESS
 ENV NWIS_DATABASE_PORT $NWIS_DATABASE_PORT
-ENV NWIS_DATABASE_USERNAME $NWIS_DATABASE_USERNAME
-ENV NWIS_DATABASE_PASSWORD $NWIS_DATABASE_PASSWORD
-ENV PYGEOAPI_SERVER_HOST $PYGEOAPI_SERVER_HOST
+ENV NWIS_DATABASE_NAME $NWIS_DATABASE_NAME
+ENV NWIS_SCHEMA_NAME_QUOTED $NWIS_SCHEMA_NAME_QUOTED
+ENV NWIS_SCHEMA_OWNER_USERNAME $NWIS_SCHEMA_OWNER_USERNAME
+ENV NWIS_SCHEMA_OWNER_PASSWORD $NWIS_SCHEMA_OWNER_PASSWORD
 ENV PYGEOAPI_SERVER_PORT $PYGEOAPI_SERVER_PORT
 ENV SCRIPT_NAME $SCRIPT_NAME
 ENV PYGEOAPI_SERVER_URL $PYGEOAPI_SERVER_URL
@@ -100,10 +99,9 @@ RUN \
 
 # Install pygeoapi
 RUN \
-	cd /pygeoapi \
+	cd /home/python/pygeoapi \
 	&& ${PIP3} install -r requirements.txt \
-	&& ${PIP3} install -r requirements-dev.txt \
-	&& ${PIP3} install -r requirements-provider.txt \
+	&& ${PIP3} install flask_cors psycopg2-binary \
 	&& ${PIP3} install -e .
 
 # Cleanup TODO: remove unused Locales and TZs
@@ -113,7 +111,7 @@ RUN \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY ./local.config.yml /pygeoapi/local.config.yml
-RUN cp /pygeoapi/docker/entrypoint.sh /entrypoint.sh
+RUN cp /home/python/pygeoapi/docker/entrypoint.sh /entrypoint.sh
 
 WORKDIR /pygeoapi
 ENTRYPOINT ["/entrypoint.sh"]

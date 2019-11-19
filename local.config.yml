@@ -1,7 +1,7 @@
 server:
   bind:
     host: 0.0.0.0
-    port: ${PYGEOAPI_SERVER_PORT}
+    port: 80
   url: ${PYGEOAPI_SERVER_URL}
   mimetype: application/json; charset=UTF-8
   encoding: utf-8
@@ -51,14 +51,14 @@ metadata:
 datasets:
   nwis_monitoring_locations:
     title: NWIS Monitoring Locations
-    description: Locations where water quality sampling activities have been recorded in the NWIS source
+    description: USGS water monitoring locations managed in the National Water Information System
     keywords:
       - WQP
     links:
       - type: text/html
         rel: canonical
         title: information
-        href: https://wqp-test.er.usgs.gov/provider/STEWARDS/
+        href: https://labs.waterdata.usgs.gov/api/ogcAPI
         hreflang: en-US
     extents:
       spatial:
@@ -67,10 +67,10 @@ datasets:
     provider:
       name: PostgreSQL
       data:
-        host: ${NWIS_DATABASE_HOST}
-        dbname: nwis_db
-        user: ${NWIS_DATABASE_USERNAME} 
-        password: ${NWIS_DATABASE_PASSWORD} 
+        host: ${NWIS_DATABASE_ADDRESS}
+        dbname: ${NWIS_DATABASE_NAME}
+        user: ${NWIS_SCHEMA_OWNER_USERNAME}
+        password: ${NWIS_SCHEMA_OWNER_PASSWORD}
         port: ${NWIS_DATABASE_PORT}
         search_path: ['nwis', 'public']
       id_field: monitoring_location_id

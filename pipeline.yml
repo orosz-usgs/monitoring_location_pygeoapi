@@ -1,12 +1,18 @@
+artifactoryPath: "wdfn"
+gitlabPath: "wma/docker/time-series-services"
+dockerImageName: "time-series-services"
+repoPath: "ACWI-SSWD/monitoring_location_pygeoapi.git"
+gitRepoUrl: https://github.com/ACWI-SSWD/monitoring_location_pygeoapi.git
+gitRepoCredentialsId: "Jenkins-GitHub-Read-Write-Token"
+deployJobName: "monitoring-location-pygeoapi-deploy"
 projectName: iow-allegemein
-dockerImageName: monitoring_location_pygeoapi-docker
+dockerImageName: monitoring_location_pygeoapi
 memory: 2048
-applicationName: monitoring_location_pygeoapi
+applicationName: monitoring-location-pygeoapi
 rulePriority: 93
-containerPort: 8080
+containerPort: 80
 healthCheck: /api/ogcAPI/collections
 contextPath: /api/ogcAPI/*
-gitRepoUrl: https://github.com/ACWI-SSWD/monitoring_location_pygeoapi.git
 gitRepoCredentialsId: GITHUB_ACCESS_TOKEN
 # configuration repository paths
 configRepoPath: "wma/docker/monitoring_location_pygeoapi"

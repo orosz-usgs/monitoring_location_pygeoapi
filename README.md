@@ -12,11 +12,12 @@ To run in a development environment, create an .env file in
 the project root directory containing the following (shown are example values):
 
 ...
-NWIS_DATABASE_HOST=<192.168.0.1>
+NWIS_DATABASE_ADDRESS=<192.168.0.1>
 NWIS_DATABASE_PORT=<5434>
+NWIS_DATABASE_NAME->nwis_db>
 
-NWIS_DATABASE_USERNAME=<nwis_username>
-NWIS_DATABASE_PASSWORD=<changeMe>
+NWIS_SCHEMA_OWNER_USERNAME=<nwis_owner>
+NWIS_SCHEMA_OWNER_PASSWORD=<changeMe>
 
 PYGEOAPI_SERVER_IPV4=<172.29.0.2>
 
@@ -28,7 +29,6 @@ SCRIPT_NAME=</api/ogcAPI>
 A .env.example is provided as a starting point.
 
 ...
-docker network create --subnet=172.29.0.0/16 --gateway 172.29.0.1 geoapi
 docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 mynet
 ...
 
@@ -37,9 +37,11 @@ docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 my
 * **NWIS_DATABASE_HOST** - Host name or IP address of the NWIS database. Must be reachable from inside the
 container.
 * **NWIS_DATABASE_PORT** - Port of the NWIS database.
+* **NWIS_DATABASE_PORT** - Port of the NWIS database.
+* **NWIS_DATABASE_NAME** - Name of the PostgreSQL database to containing the nwis schema.
 
-* **NWIS_DATABASE_USERNAME** - username used to login to the NWIS database
-* **NWIS_DATABASE_PASSWORD** - password used to login to the NWIS database
+* **NWIS_SCHEMA_OWNER_USERNAME** - username used to login to the NWIS database
+* **NWIS_SCHEMA_OWNER_PASSWORD** - password used to login to the NWIS database
 
 * **PYGEOAPI_SERVER_IPV4** - Docker IP address used
 
