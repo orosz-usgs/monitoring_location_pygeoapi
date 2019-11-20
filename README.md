@@ -16,12 +16,11 @@ NWIS_DATABASE_ADDRESS=<192.168.0.1>
 NWIS_DATABASE_PORT=<5434>
 NWIS_DATABASE_NAME->nwis_db>
 
+NWIS_SCHEMA_NAME=<nwis>
 NWIS_SCHEMA_OWNER_USERNAME=<nwis_owner>
 NWIS_SCHEMA_OWNER_PASSWORD=<changeMe>
 
-PYGEOAPI_SERVER_IPV4=<172.29.0.2>
-
-PYGEOAPI_SERVER_HOST=<localhost>
+PYGEOAPI_SERVER_URL=<server_url>
 PYGEOAPI_SERVER_PORT=<5000>
 SCRIPT_NAME=</api/ogcAPI>
 ```
@@ -40,12 +39,11 @@ container.
 * **NWIS_DATABASE_PORT** - Port of the NWIS database.
 * **NWIS_DATABASE_NAME** - Name of the PostgreSQL database to containing the nwis schema.
 
+* **NWIS_SCHEMA_NAME** - Name of the schema holding the nwis database objects.
 * **NWIS_SCHEMA_OWNER_USERNAME** - username used to login to the NWIS database
 * **NWIS_SCHEMA_OWNER_PASSWORD** - password used to login to the NWIS database
 
-* **PYGEOAPI_SERVER_IPV4** - Docker IP address used
-
-* **PYGEOAPI_SERVER_HOST** - Host name or IP address of the pygeoapi server.
+* **PYGEOAPI_SERVER_URL** - The fully qualified url used to connect to the pygeoapi server.
 * **PYGEOAPI_SERVER_PORT** - Port used to connect to API geo server.
 
 * **SCRIPT_NAME** - The url path used to access the API geo server.
@@ -54,10 +52,10 @@ container.
 The pygeoapi server can be tested locally by spinning up the docker container.
 
 ```
-% docker-compose up -d monitoring_location_pygeoapi
+% docker-compose up monitoring_location_pygeoapi
 ```
 
-The application can be accessed at: http://${PYGEOAPI_SERVER_HOST}:${PYGEOAPI_SERVER_PORT}${SCRIPT_NAME}
+The application can be accessed at: ${PYGEOAPI_SERVER_URL}
 e.g. http://localhost:5000/api/ogcAPI
 
 ### Other Helpful commands include:
