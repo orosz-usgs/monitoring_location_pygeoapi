@@ -31,8 +31,8 @@ metadata:
     name: CC-BY 4.0 license
     url: https://creativecommons.org/licenses/by/4.0/
   provider:
-    name: National Water Quality Monitoring Counci
-    url: https://github.com/NWQMC
+    name: U.S. Geological Survey
+    url: https://www.usgs.gov/water
   contact:
     name: Jim Kreft
     position: Product Owner
@@ -49,7 +49,7 @@ metadata:
     role: pointOfContact
 
 datasets:
-  nwis_monitoring_locations:
+  monitoring_locations:
     title: NWIS Monitoring Locations
     description: USGS water monitoring locations managed in the National Water Information System
     keywords:
