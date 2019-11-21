@@ -7,7 +7,7 @@ gitRepoCredentialsId: "Jenkins-GitHub-Read-Write-Token"
 deployJobName: "monitoring-location-pygeoapi-deploy"
 projectName: iow-allegemein
 memory: 2048
-applicationName: monitoring-location-pygeoapi
+applicationName: monitoring_location_pygeoapi
 rulePriority: 93
 containerPort: 80
 healthCheck: /api/ogcAPI/collections
