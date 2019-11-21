@@ -6,8 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Project url: https://github.com/ACWI-SSWD/monitoring_location_pygeoapi.git
 
-## [Unreleased]
-
 ### Added
 - CHANGELOG.md
 - README.md
