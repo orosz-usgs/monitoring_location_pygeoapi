@@ -24,5 +24,6 @@ COPY --chown=$USER ./local.config.yml /pygeoapi/local.config.yml
 RUN cp /home/python/pygeoapi/docker/entrypoint.sh /entrypoint.sh
 
 WORKDIR /pygeoapi
-ENTRYPOINT ["/entrypoint.sh"]
+EXPOSE 8080
 USER $USER
+ENTRYPOINT ["/entrypoint.sh"]
