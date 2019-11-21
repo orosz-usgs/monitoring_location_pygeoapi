@@ -25,8 +25,6 @@ PYGEOAPI_SERVER_PORT=<5000>
 SCRIPT_NAME=</api/ogcAPI>
 ```
 
-A .env.example is provided as a starting point.
-
 ...
 docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 mynet
 ...

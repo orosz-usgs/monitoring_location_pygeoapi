@@ -11,7 +11,7 @@ Project url: https://github.com/ACWI-SSWD/monitoring_location_pygeoapi.git
 ### Added
 - CHANGELOG.md
 - README.md
-- pipeline.yml and two Jenkinsfiles
+- pipeline.yml
+- Jenkinsfile.build
+- Jenkinsfile.deploy
 - local.config.yml
-
-[Unreleased]: 

@@ -1,15 +1,13 @@
 FROM usgswma/python:debian-slim-buster-python-3.7-e923cf03e5573ba531a90edc9b8ae0f5f7cb6e13
 
-ENV DEB_BUILD_DEPS="build-essential apt-utils git" \
-       DEB_PACKAGES="libgdal20 python3-gdal libsqlite3-mod-spatialite curl" \
-       PIP_PACKAGES="gunicorn==19.9.0 gevent==1.4.0"
+ENV BUILD_DEPS="git"
+ENV PIP_PACKAGES="gunicorn==19.9.0 gevent==1.4.0"
 
 ENV PIP3="pip3 --trusted-host pypi.org --trusted-host files.pythonhosted.org"
 ENV GIT_SSL_NO_VERIFY=true
 
 # Install dependencies
-RUN apt-get update \
-   && apt-get --no-install-recommends install -y ${DEB_BUILD_DEPS} ${DEB_PACKAGES}
+RUN apt-get --no-install-recommends install -y ${BUILD_DEPS}
 
 # Pull pygeoapi from git repository
 RUN git clone https://github.com/ACWI-SSWD/pygeoapi.git
