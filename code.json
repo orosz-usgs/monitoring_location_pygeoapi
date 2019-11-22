@@ -3,7 +3,7 @@
     "name": "Monitoring Location Services",
     "organization": "U.S. Geological Survey",
     "description": OGC WFS3 API for geospatial information in NWIS
-    "version": "0.1.0-SNAPSHOT",
+    "version": "0.1.0dev",
     "status": "Development",
 
     "permissions": {
