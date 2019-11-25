@@ -12,7 +12,6 @@ rulePriority: 93
 containerPort: 8080
 healthCheck: /api/ogcAPI/collections
 contextPath: /api/ogcAPI/*
-gitRepoCredentialsId: GITHUB_ACCESS_TOKEN
 # configuration repository paths
 configRepoPath: "wma/docker/monitoring_location_pygeoapi"
 configCredentialsId: "wma-eto-eb-rsa"
