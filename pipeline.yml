@@ -1,3 +1,4 @@
+projectName: monitoring_location_pygeoapi
 artifactoryPath: "wdfn"
 gitlabPath: "wma/docker/monitoring_location_pygeoapi"
 dockerImageName: "monitoring_location_pygeoapi"
@@ -5,7 +6,6 @@ repoPath: "ACWI-SSWD/monitoring_location_pygeoapi.git"
 gitRepoUrl: https://github.com/ACWI-SSWD/monitoring_location_pygeoapi.git
 gitRepoCredentialsId: "Jenkins-GitHub-Read-Write-Token"
 deployJobName: "monitoring-location-pygeoapi-deploy"
-projectName: iow-allegemein
 memory: 2048
 applicationName: monitoring_location_pygeoapi
 rulePriority: 93
