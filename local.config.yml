@@ -73,4 +73,43 @@ datasets:
           - ${NWIS_SCHEMA_NAME}
           - 'public'
       id_field: monitoring_location_id
-      table: monitoring_location
+      table: "(select monitoring_location_id, geom,
+               agency, site_identification_number, site_name, site_type,
+               district, state, county, country,
+               altitude_of_guage_land_surface, method_altitude_determined,
+               altitude_accuracy, altitude_datum, national_aquifer, local_aquifer,
+               local_aquifer_type, well_depth, hole_depth, source_of_hole_depth,
+               agency_cd, district_cd,
+               country_cd || ':' || state_cd as state_fips,
+               country_cd || ':' || state_cd || ':' || county_cd as county_fips,
+               country_cd as country_fips,
+               subbasin_hydrologic_unit,
+               'https://waterdata.usgs.gov/monitoring-location/' || site_identification_number as monitoring_location_url
+               from monitoring_location) as monitoring_location"
+      column_property_mapping: {
+        'agency' : 'agency',
+        'site_identification_number' : 'monitoringLocationNumber',
+        'site_name' : 'monitoringLocationName',
+        'site_type' : 'monitoringLocationType',
+        'district' : 'district',
+        'state' : 'state',
+        'county' : 'county',
+        'country' : 'country',
+        'altitude_of_guage_land_surface' : 'monitoringLocationAltitudeLandSurface',
+        'method_altitude_determined' : 'altitudeMethod',
+        'altitude_accuracy' : 'altitudeAccuracy',
+        'altitude_datum' : 'altitudeDatum',
+        'national_aquifer' : 'nationalAquifer',
+        'local_aquifer' : 'localAquifer',
+        'local_aquifer_type' : 'localAquiferType',
+        'well_depth' : 'wellDepth',
+        'hole_depth' : 'holeDepth',
+        'source_of_hole_depth' : 'holeDepthSource',
+        'agency_cd' : 'agencyCode',
+        'district_cd' : 'districtCode',
+        'state_fips' : 'stateFIPS',
+        'county_fips' : 'countyFIPS',
+        'country_fips' : 'countryFIPS',
+        'subbasin_hydrologic_unit' : 'hydrologicUnit',
+        'monitoring_location_url' : 'monitoringLocationUrl'
+      }
