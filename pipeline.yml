@@ -1,4 +1,4 @@
-projectName: iow-allegemein
+projectName: iow-allgemein
 artifactoryPath: "wdfn"
 gitlabPath: "wma/docker/monitoring_location_pygeoapi"
 dockerImageName: "monitoring_location_pygeoapi"
